@@ -10,4 +10,12 @@ $uri = trim($uri, '/');
 
 $app = new Core\Core();
 
-var_dump($app->run('Router', 'get', $uri));
+$mbappe = $app->run('Router', 'get', $uri);
+var_dump($mbappe['action']);
+
+$neymar = new $mbappe['controller'];
+$neymar->{$mbappe['action']}();
+
+
+
+
