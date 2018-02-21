@@ -2,7 +2,8 @@
 namespace Core;
 
 class Core {
-    public function run(){
-        echo __CLASS__ . " [OK] " . PHP_EOL;
+    public function run($controller, $action, $params = null){
+        $obj = new $controller;
+        return $obj->{$action}($params);
     }
 }
