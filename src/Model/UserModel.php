@@ -4,58 +4,26 @@ class UserModel
 {
     private $_email;
     private $_password;
+    protected $_db;
 
     public function __construct(){
-        $servername = "localhost";
-        $username = "root";
-        $pass = "";
-
-        try {
-            $conn = new PDO("mysql:host=$servername;dbname=test", $username, $pass);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-        catch(PDOException $e){
-            echo "Connection failed: " . $e->getMessage();
-        }
+        $this->_db = new Database();
+        $this->_db = $this->_db->getConnection();
     }
 
     public function save($email, $password){
-    
-        $servername = "localhost";
-        $username = "root";
-        $pass = "";
-
-        try {
-            $conn = new PDO("mysql:host=$servername;dbname=test", $username, $pass);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-        catch(PDOException $e){
-            echo "Connection failed: " . $e->getMessage();
-        }
 
         $sql = "INSERT INTO users (email, password) VALUES ('".$email."','". $password ."')";
-        var_dump($sql);
-        $stmt = $conn->prepare($sql);
+        $stmt = $this->_db->prepare($sql);
         $stmt->execute();
+        return $this->_db->lastInsertId();
     }
 
     public function login($email, $password){
-        $servername = "localhost";
-        $username = "root";
-        $pass = "";
-
-        try {
-            $conn = new PDO("mysql:host=$servername;dbname=test", $username, $pass);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-        catch(PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-        $sql = "SELECT * FROM users";
-        $stmt = $conn->query($sql);
+        
+        $sql = "SELECT * FROM users";   
+        $stmt = $this->_db->query($sql);
         $row = $stmt->fetchAll();
-
-        var_dump($row);
 
         for($i = 0; $i < count($row); $i++){
             if($row[$i]['email'] === $email && $row[$i]['password'] === $password){
@@ -65,8 +33,30 @@ class UserModel
                 return false;
             }
         }
-
-
     }
+
+    public function create($email, $password){
+        $sql = "INSERT INTO users (email, password) VALUES ('".$email."','". $password ."')";
+        $stmt = $this->_db->prepare($sql);
+        $stmt->execute();
+        return $this->_db->lastInsertId(); 
+    }
+    public function read($id){
+        $sql = "SELECT * FROM users WHERE id =" . $id;
+        $stmt = $this->_db->query($sql);
+        $row = $stmt->fetchAll();
+        return $row;
+    }
+    public function update($email, $password, $id){
+        $sql = "UPDATE users SET email = " . $email . ", password =" . $password . " WHERE id = " .$id;
+        $stmt = $this->_db->prepare($sql);
+        $stmt->exectute(); 
+    }
+    public function delete($id){
+        $sql = "DELETE from users WHERE id=". $id;
+        $stmt = $this->_db->prepare($sql);
+        $stmt->exectute();
+    }
+
     
 }

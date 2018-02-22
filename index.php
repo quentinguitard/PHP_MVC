@@ -11,6 +11,7 @@ $uri = trim($uri, '/');
 $app = new Core\Core();
 
 $routes = $app->run('Router', 'get', $uri);
+
 var_dump($routes);
 
 $runRoutes = new $routes['controller'];
