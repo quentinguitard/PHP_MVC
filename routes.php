@@ -1,4 +1,9 @@
 <?php
 
 Router::connect('/',['controller'=>'app','action'=>'index']);
-Router::connect('index/add',['controller'=>'AppController','action'=>'render']);
+Router::connect('user',['controller'=>'UserController','action'=>'index']);
+Router::connect('user/login',['controller'=>'UserController','action'=>'login']);
+Router::connect('user/register',['controller'=>'UserController','action'=>'register']);
+Router::connect('user/add',['controller'=>'UserController','action'=>'registerAction']);
+
+

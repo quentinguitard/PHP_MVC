@@ -1,26 +1,33 @@
 <?php
 
-class UserController
+class UserController extends Controller
 {
-    Private $_email;
-    Private $_password;
-    
-    function __construct($email, $password){
-        $this->setEmail($email);
-        $this->setPassword($password);
+    public function index(){
+        $this->render('login');
     }
 
+    public function register()
+    {
+        $this->render('register', []);
+    }
 
-    public function getEmail(){
-		return $this->_email;
+    public function registerAction(){
+        $addUser = new UserModel();
+        $addUser->save($_POST['email'], $_POST['password']);
+        var_dump($_POST);
+        echo "registerAction";
+
     }
-    public function getPassword(){
-        return $this->_password;
+    public function login(){
+        $loginUser = new UserModel();
+        var_dump($_POST);
+        if($loginUser->login($_POST['email'], $_POST['password']) === true){
+            echo "Connected";
+        }
+        else{
+            echo " FAILED TO CONNECT";
+        }
+            
     }
-    public function setEmail($email){
-         $this->_email = $email;
-    }
-    public function setPassword($password){
-        $this->_password = $password;
-    }
+
 }

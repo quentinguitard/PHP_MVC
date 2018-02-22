@@ -1,8 +1,6 @@
 <?php
 
-class AppController
+class AppController extends Controller
 {
-    public function render(){
-        echo 'Wesh je marque plus de buts!!!';
-    }
+    
 }
