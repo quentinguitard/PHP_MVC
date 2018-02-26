@@ -2,7 +2,8 @@
 namespace Model;
 use \Core\ORM;
 use \Core\Database;
-class UserModel
+use \Core\Entity;
+class UserModel extends Entity
 {
     private $_email;
     private $_password;
