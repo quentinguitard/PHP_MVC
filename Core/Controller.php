@@ -1,13 +1,18 @@
 <?php
-
+namespace Core;
 class Controller {
 
     private static $_render;
+    public $request;
+
+    public function __construct(){
+        $this->request = new Request();
+    }
 
     protected function render($view, $scope = []){
         extract($scope);
         $f = implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'src', 'View', str_replace('Controller', '', basename(get_class($this))), $view]) . '.php';
-      
+        var_dump($f);
         if(file_exists($f)){
             ob_start();
             include($f);

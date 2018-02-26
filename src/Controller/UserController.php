@@ -1,8 +1,11 @@
 <?php
-
+namespace Controller;
+use \Core\Controller;
+use \Model\UserModel;
+use \Core\ORM;
 class UserController extends Controller
 {
-
+    
     public function index(){
         $this->render('login');
     }
@@ -13,16 +16,18 @@ class UserController extends Controller
     }
 
     public function registerAction(){
+        $request = (array) $this->request;
+        var_dump( $request);
         $addUser = new UserModel();
-        $addUser->save($_POST['email'], $_POST['password']);
-        var_dump($_POST);
-        echo "registerAction";
+        $orm = new ORM();
+        $orm->update('users', 5, $request);
+        echo "WIN !";
 
     }
     public function login(){
         $loginUser = new UserModel();
-        var_dump($_POST);
-        if($loginUser->login($_POST['email'], $_POST['password']) === true){
+        var_dump($this->request);
+        if($loginUser->login($this->request->email, $this->request->password) === true){
             echo "Connected";
         }
         else{

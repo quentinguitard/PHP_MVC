@@ -1,5 +1,7 @@
 <?php
-
+namespace Model;
+use \Core\ORM;
+use \Core\Database;
 class UserModel
 {
     private $_email;
@@ -57,6 +59,11 @@ class UserModel
         $stmt = $this->_db->prepare($sql);
         $stmt->exectute();
     }
-
+    public function read_all(){
+        $sql = "SELECT * FROM users";
+        $stmt = $this->_db->query($sql);
+        $row = $stmt->fetchAll();
+        return $row;
+    }
     
 }
