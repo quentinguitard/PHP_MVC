@@ -40,7 +40,6 @@ class ORM extends Database
         foreach($fields as $key => $values){
             if(count($fields) == $count){
                 $set .= $key . " = '" . $values ."'";
-                
             }
             else{
                 $set .= $key . " = '" . $values . "', ";
@@ -57,7 +56,7 @@ class ORM extends Database
         $stmt->execute();
     }
 
-    // public function find($table, $params = []){
+    public function find($table, $params = []){
 
-    // }
+    }
 }

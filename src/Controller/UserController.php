@@ -17,15 +17,16 @@ class UserController extends Controller
 
     public function registerAction(){
         $request = (array) $this->request;
-        var_dump( $request);
-        $addUser = new UserModel();
-        $orm = new ORM();
-        $orm->update('users', 5, $request);
+        var_dump($request);
+        $addUser = new UserModel($request);
+        $addUser->save();
         echo "WIN !";
 
     }
     public function login(){
-        $loginUser = new UserModel();
+        $request = (array) $this->request;
+        var_dump($request);
+        $loginUser = new UserModel($request);
         var_dump($this->request);
         if($loginUser->login($this->request->email, $this->request->password) === true){
             echo "Connected";

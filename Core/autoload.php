@@ -5,9 +5,7 @@ spl_autoload_register(function ($class) {
     if(file_exists('src'.DIRECTORY_SEPARATOR. $class . '.php')){
         require_once 'src'.DIRECTORY_SEPARATOR. $class . '.php';  
     }
-    // elseif(file_exists('src'.DIRECTORY_SEPARATOR.'Model'.DIRECTORY_SEPARATOR . $class . '.php')){
-    //     require_once "src".DIRECTORY_SEPARATOR."Model".DIRECTORY_SEPARATOR . $class . '.php';  
-    // }
+
     else {
         require_once $class . '.php';
     }

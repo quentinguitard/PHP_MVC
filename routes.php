@@ -1,5 +1,5 @@
 <?php
-use \Core\Router;  
+use \Core\Router;
 
 Router::connect('',['controller'=>'UserController','action'=>'index']);
 Router::connect('user',['controller'=>'UserController','action'=>'index']);
