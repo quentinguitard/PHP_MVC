@@ -1,5 +1,6 @@
 <?php
 namespace Core;
+
 class ORM extends Database
 {
     public function create($table,$fields){
@@ -56,7 +57,18 @@ class ORM extends Database
         $stmt->execute();
     }
 
-    public function find($table, $params = []){
-
+    public function find($table, $params = [
+        "WHERE" => "1",
+        "ORDER BY" => "id ASC",
+        "LIMIT" => ""
+    ]){
+        $sql = "SELECT * FROM " . $table;
+        foreach($params as $key => $value){
+            $sql.= " " . $key . " " . $value;
+        }
+        var_dump($sql);
+        $stmt = $this->getConnection()->query($sql);
+        $row = $stmt->fetchAll();
+        return $row;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 namespace Core;
+
 class Controller {
 
     private static $_render;
     public $request;
+    public $params;
 
     public function __construct(){
         $this->request = new Request();
+        $this->params = get_object_vars($this->request);
     }
 
     protected function render($view, $scope = []){
@@ -15,6 +18,7 @@ class Controller {
         var_dump($f);
         if(file_exists($f)){
             ob_start();
+            
             include($f);
             $view = ob_get_clean();
             ob_start();
