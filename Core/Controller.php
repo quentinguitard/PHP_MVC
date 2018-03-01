@@ -1,6 +1,6 @@
 <?php
 namespace Core;
-
+use \Core\TemplateEngine;
 class Controller {
 
     private static $_render;
@@ -15,13 +15,15 @@ class Controller {
     protected function render($view, $scope = []){
         extract($scope);
         $f = implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'src', 'View', str_replace('Controller', '', basename(get_class($this))), $view]) . '.php';
-        var_dump($f);
+        //var_dump($f);
         if(file_exists($f)){
             ob_start();
-            
             include($f);
             $view = ob_get_clean();
             ob_start();
+            $parse = new TemplateEngine($f);
+            $view = $parse->parse($view);
+            var_dump($view);
             include(implode(DIRECTORY_SEPARATOR,[dirname(__DIR__), 'src', 'View','index']).'.php');
             self::$_render = ob_get_clean();
         }
