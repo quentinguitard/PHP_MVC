@@ -1,12 +1,10 @@
-this is a test !
+Salut
 
-
-
-@if (count($bla == 0))
+@if      (count(0 == 0))
 To toto
-@elseif (count($records) > 1 )
-Blabla
-
-@else
-bla Je bla blatte
 @endif
+@!empty($_POST)
+{{ bonsoire }}
+@endempty
+
+
