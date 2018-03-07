@@ -7,7 +7,7 @@ class TemplateEngine
     public function __construct($file){
         $this->file =$file;
     }
-    
+
     public function parse(){
             $storage = str_replace('Storage','View',$this->file);
         $patterns = [
@@ -43,7 +43,6 @@ class TemplateEngine
         $content = file_get_contents($storage);
         $content = preg_replace($patterns, $replacements, $content);
         file_put_contents($this->file, $content);
-        var_dump($this->file, file_get_contents($this->file));
         return $this->file;
         
     }

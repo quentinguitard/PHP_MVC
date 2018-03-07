@@ -13,7 +13,7 @@ class Database
     public function __construct(){
 
         try {
-            $this->_connection = new PDO("mysql:host=$this->_servername;dbname=test", $this->_username, $this->_pass);
+            $this->_connection = new PDO("mysql:host=$this->_servername;dbname=epitech_tp", $this->_username, $this->_pass);
             $this->_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         }

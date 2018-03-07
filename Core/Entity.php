@@ -2,18 +2,22 @@
 namespace Core;
 
 use \Core\ORM;
-
+use \Core\Database;
 class Entity
 {
     public $ORM;
     public $table;
     public $params; 
+    protected $_db;
 
     public function __construct($params, $id = null){
         $this->ORM = new ORM();
         $this->table = strtolower(substr(str_replace('Model', '', get_class($this)),1)) . 's';
         $this->params = $params;
         $this->id = $id;
+        $db = new Database();
+        $this->_db = $db->getConnection();
+
     }
     public function save(){
         if(!isset($this->id)){
@@ -24,8 +28,8 @@ class Entity
         }
     }
 
-    public function read($id){
-       return $this->ORM->read($this->id);
+    public function read(){
+       return $this->ORM->read($this->table,$this->id);
     }
 
     public function delete($id){

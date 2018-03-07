@@ -28,7 +28,7 @@ class ORM extends Database
     }
 
     public function read($table, $id){
-        $sql = "SELECT * FROM " . $table . " WHERE id = ". $id;
+        $sql = "SELECT * FROM " . $table . " WHERE id_".substr($table,0,-1)." = ". $id;
         $stmt = $this->getConnection()->query($sql);
         $row = $stmt->fetchAll();
         return $row;
@@ -47,12 +47,12 @@ class ORM extends Database
                 $count++;
             }
         }
-        $sql .= $set . " WHERE id=" . $id;
+        $sql .= $set . " WHERE id_".substr($table,0,-1)."=" . $id;
         $stmt = $this->getConnection()->prepare($sql);
         $stmt->execute();
     }
     public function delete($table, $id){
-        $sql = "DELETE from ".$table." WHERE id=". $id;
+        $sql = "DELETE from ".$table." WHERE id_".substr($table,0,-1)."=". $id;
         $stmt = $this->getConnection()->prepare($sql);
         $stmt->execute();
     }
