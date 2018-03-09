@@ -14,7 +14,7 @@
                 <div class="form-group row">
                     <label for="password" class="col-2 col-form-label">Nouveau Password</label>
                     <div class="col-10">
-                        <input type="password" name="password" class="form-control">
+                        <input type="password" autocomplete="off" name="password" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">

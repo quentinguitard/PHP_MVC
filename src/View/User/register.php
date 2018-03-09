@@ -1,7 +1,7 @@
 
-<div class="container-fluid ">
+<div class="container-fluid">
     <div class="row">
-        <div class="container col-8 border border-dark rounded pt-3 mb-4 mt-4">
+        <div class="background-white-light container col-8 rounded pt-3 mb-4 mt-4">
 
             <form action="../user/add" method="post">
                 <div class="form-group row">
@@ -55,14 +55,19 @@
                 <div class="form-group row">
                     <label for="abonnement" class="col-2 col-form-label">Abonnement</label>
                     <div class="col-10">
-                        <select class="form-control" name='id_abonnement'>
-                            @foreach($aboList as $values)
+                        <select class="form-control custom-select" name='id_abonnement'>
+                                <option selected>Choose...</option>    
+                        @foreach($aboList as $values)
                                 <option value="<?= $values['id_abonnement']; ?>">{{$values['nom']}}</option>
                             @endforeach
                     </select>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-primary" value="Envoyer" >
+                <div class="form-group row">
+                    <div class="col d-flex flex-row-reverse">
+                        <input type="submit" class="btn btn-primary" value="Envoyer" >
+                    </div>
+                </div>
             </form>
         </div>
     </div>

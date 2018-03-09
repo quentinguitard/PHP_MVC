@@ -74,38 +74,41 @@ class UserController extends Controller
         
         $profile = new UserModel($this->params, $_SESSION['idUser']);
         $userProfile = $profile->read();
-        var_dump($userProfile);
+        //var_dump($userProfile);
 
         $membre = new MembreModel($this->params);
         $membreDetails = $membre->find(['WHERE' => 'id_user = '. $_SESSION['idUser'] ]);
-        //var_dump($membreDetails);
 
         $abo = new AbonnementModel($this->params, $membreDetails[0]['id_abonnement']);
         $aboList = $abo->find(["WHERE"=>"1"]);
         $aboUser = $abo->read();
-        //var_dump($aboUser);
-        var_dump($this->params);
+
         $this->render('profile', ['userProfile' => $userProfile[0] , "aboList" => $aboList, 'aboUser'=>$aboUser[0]]);
     }
 
     public function editProfile(){
         
-        // var_dump($this->request);
         $idAbo = $this->params['id_abonnement'];
         unset($this->params['id_abonnement']);
-        $profile = new UserModel($this->params, $_SESSION['idUser']);
-        $authUser = $profile->find(["WHERE" => "email = '" . $this->request->email ."'"]);
-        $readProfile = $profile->read();
-        var_dump($readProfile);
-
+        $membre = new MembreModel(['id_abonnement'=>$idAbo]);
+        $findMembre = $membre->find(['WHERE' => 'id_user = '.$_SESSION['idUser']]);
+        var_dump($findMembre);
+        
         if(empty($this->request->password)){
             unset($this->params['password']);
         }
 
+        $profile = new UserModel($this->params, $_SESSION['idUser']);
+        $authUser = $profile->find(["WHERE" => "email = '" . $this->request->email ."'"]);
+        $readProfile = $profile->read();
+        
         if(!empty($this->request->email) &&  !empty($this->request->nom) && !empty($this->request->prenom) && !empty($this->request->ville) &&  !empty($this->request->cpostal)){
            if($readProfile[0]['email'] == $this->request->email || $authUser[0]['email'] != $this->request->email){
                $userProfile = $profile->save();
-               header('Location: /PiePHP/user/profile');           }
+               $membre = new MembreModel(['id_abonnement'=>$idAbo], $findMembre[0]['id_membre']);
+               $updateMembre = $membre->save();
+               header('Location: /PiePHP/user/profile');           
+            }
            else{
                header('Location: /PiePHP/user/profile');
            }        

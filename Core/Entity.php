@@ -32,7 +32,7 @@ class Entity
        return $this->ORM->read($this->table,$this->id);
     }
 
-    public function delete($id){
+    public function delete(){
         $this->ORM->delete($this->table, $this->id);
     }
     public function find($option){

@@ -17,6 +17,7 @@ class Router
         }
         else {
             echo "ERREUR 404";
+            die();
         }
     }
 }

@@ -1,8 +1,8 @@
 
 
-<div class="container-fluid ">
+<div class="container-fluid">
     <div class="row">
-        <div class="container col-8 border border-dark rounded pt-3 mb-4 mt-4">
+        <div class="container col-8 background-white-light rounded pt-3 mb-4 mt-4">
 
             <form action="../user/editProfile" method="post">
                 <div class="form-group row">
@@ -14,7 +14,7 @@
                 <div class="form-group row">
                     <label for="password" class="col-2 col-form-label">Nouveau Password</label>
                     <div class="col-10">
-                        <input type="password" name="password" class="form-control">
+                        <input type="password" autocomplete="off" name="password" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -50,7 +50,7 @@
                 <div class="form-group row">
                     <label for="abonnement" class="col-2 col-form-label">Abonnement</label>
                     <div class="col-10">
-                        <select class="form-control" name='id_abonnement'>
+                        <select class="form-control custom-select" name='id_abonnement'>
                             <option value="<?= $aboUser['id_abonnement']; ?>">{{$aboUser['nom']}}</option>
                             @foreach($aboList as $values)
                                 <option value="<?= $values['id_abonnement']; ?>">{{$values['nom']}}</option>
@@ -58,7 +58,11 @@
                     </select>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-primary" value="Modifier" >
+                <div class="form-group row">
+                    <div class="col d-flex flex-row-reverse">
+                        <input type="submit" class="btn btn-primary" value="Modifier" >
+                    </div>
+                </div>
             </form>
         </div>
     </div>
