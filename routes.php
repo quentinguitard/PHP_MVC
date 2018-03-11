@@ -18,3 +18,4 @@ Router::connect('film',['controller'=>'FilmController','action'=>'index']);
 Router::connect('film/search',['controller'=>'FilmController','action'=>'searchFilm']);
 
 Router::connect('film/filmInfo', ['controller' => 'FilmController', 'action' => 'filmInfo']);
+Router::connect('film/edit', ['controller' => 'FilmController', 'action' => 'editFilm']);

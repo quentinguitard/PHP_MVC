@@ -1,23 +1,27 @@
-<div class="container">
+<div class="container mt-4">
     <div class="row">
-        <div class="col" id="img">
-            <h2>{{$filmInfo['titre']}}</h2>
+        <div class="col flex-column d-flex justify-content-center">
             <input type="hidden" value="<?= $filmInfo['titre'];?>" id="name">
-            <img>
+            <div class="p-2" id="img"></div>
+            
         </div>
-        <div class="col">
-            <p>{{$filmInfo['resum']}}</p>
+        <div class="col d-flex flex-column ">
+            <div class="d-flex border background-white-light-7 rounded p-1 mb-3">
+                <h2 class="p-2">{{$filmInfo['titre']}}</h2>
+                <p> ( {{$filmInfo['annee_prod']}} )</p>
+            </div>
+            <p class="border background-white-light-7 rounded p-3">{{$filmInfo['resum']}}</p>
+            <h4 class="border background-white-light-7 rounded p-2">Genre: {{$genreNom['nom_genre']}}</h4>
+            @!empty ($distribNom)
+            <h4 class="border background-white-light-7 rounded p-2">Distributeur: {{$distribNom[0]['nom_distrib']}}</h4>
+            @endisset
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <h4>Genre du film : {{$genreNom['nom_genre']}}</h4>
         </div>
-        <div class="col">
-            @!empty ($distribNom)
-            <h4>Distributeur du film : {{$distribNom[0]['nom_distrib']}}</h4>
-            @endisset
-
+        <div class="col d-flex justify-content-end">
+        <a href="/PiePHP/film/edit?id_film=<?= $filmInfo['id_film'];?>" class="text-light"><button  type="button" class="btn btn-dark">MODIFIER <i class="fas fa-edit"></i></button></a>
         </div>  
     </div>
 </div>
@@ -31,7 +35,7 @@ $.ajax({
     dataType: 'jsonp'
     }).done(function( msg ) {
     console.log(msg.results[0].poster_path );
-    $('<img>').attr("src", 'https://image.tmdb.org/t/p/w400/' + msg.results[0].poster_path).appendTo('#img')
+    $('<img>').attr("src", 'https://image.tmdb.org/t/p/w300/' + msg.results[0].poster_path).appendTo('#img')
     
   });
 

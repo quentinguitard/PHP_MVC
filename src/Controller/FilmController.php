@@ -84,4 +84,33 @@ class FilmController extends Controller
             'distribNom' => $distribNom
             ]);
     }
+
+    public function editFilm(){
+        $genre = new GenreModel($this->params);
+        $allGenre = $genre->find(['WHERE' => '1']);
+        
+        $distrib = new DistribModel($this->params);
+        $allDistrib = $distrib->find(['WHERE' => '1']);
+
+        $film = new FilmModel($this->params, $_GET['id_film']);
+        $filmInfo = $film->read();
+
+        $genre = new GenreModel($this->params, $filmInfo[0]['id_genre']);
+        $genreNom = $genre->read();
+
+        $distribNom = "";
+
+        if(isset($filmInfo[0]['id_distrib'])){
+            $distrib = new DistribModel($this->params, $filmInfo[0]['id_distrib']);
+            $distribNom = $distrib->read();
+        }
+        
+        $this->render('edit', [
+            'allGenre' => $allGenre, 
+            'allDistrib' => $allDistrib,
+            'filmInfo' => $filmInfo[0],
+            'genreNom' => $genreNom[0],
+            'distribNom' => $distribNom
+            ]);        
+    }
 }
