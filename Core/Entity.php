@@ -38,4 +38,8 @@ class Entity
     public function find($option){
         return $this->ORM->find($this->table,$option);
     }
+
+    public function nb_pages($option){
+        return $this->ORM->nb_pages($this->table,$option);
+    }
 }

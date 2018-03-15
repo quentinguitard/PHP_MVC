@@ -57,17 +57,40 @@
         </table>
     </div>
     <nav aria-label="Page navigation example " >
-    <ul class="pagination justify-content-center">
-    <li class="page-item disabled ">
-    <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
-    <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-    <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
-    <li class="page-item">
-    <a class="page-link text-dark" href="#">Next</a>
-    </li>
-    </ul>
+
+
+<?php
+$page_before_after = 4;
+$pagination = "";
+if($nb_pages != 1){
+	if($page > 1){
+	    $previous = $page - 1;
+		$pagination .= "<li class='page-item'><a class='page-link text-dark' href='/PiePHP/film/search?page=".$previous."'>Previous</a></li>";
+		
+        for($i = $page - $page_before_after; $i < $page; $i++){
+            if($i > 0){
+                $pagination .= "<li class='page-item'><a class='page-link text-dark' href='/PiePHP/film/search?page=".$i."'>".$i."</a></li>";
+            }
+        }
+	}
+}
+$pagination .= "<li class='page-item disabled'><a class='page-link text-muted' href='#'>".$page." </a></li>";
+
+	for($i=$page + 1; $i <= $nb_pages; $i++){
+	$pagination .= "<li class='page-item'><a class='page-link text-dark' href='/PiePHP/film/search?page=".$i."'>".$i."</a></li> ";
+		if($i >= $page + $page_before_after){
+			break;
+		}
+	}
+	if($page != $nb_pages){
+	$next = $page +1;
+	$pagination .= "<li class='page-item'><a class='page-link text-dark' href='/PiePHP/film/search?page=".$next."'>next</a></li>";
+	}
+
+
+echo "<ul class='pagination justify-content-center'>".$pagination."</ul>";
+
+				?>
     </nav>
 </div>
 @endisset

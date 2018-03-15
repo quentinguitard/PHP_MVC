@@ -10,22 +10,37 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     <title>My cinema</title>
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+    <div class="container">
         <a class="navbar-brand" href="/PiePHP">My cinema</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/PiePHP">Home</a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown width-90">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Movies
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <?php if(isset($_SESSION['idUser'])): ?>
+                        <a class="dropdown-item" href="/PiePHP/film/addForm">Ajouter un film</a>
+                    <?php endif; ?>
+                        <a class="dropdown-item" href="/PiePHP/film">Recherche films</a>
+                    </div>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="/PiePHP/film">Movies</a>
+                    <a class="nav-link" href="/PiePHP/genre">
+                    Genres
+                    </a>
+                    
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="#">Members</a>
                 </li>
@@ -41,10 +56,13 @@
             <?php endif; ?>
             </div>
         </div>
+    </div>
     </nav>
 
 
 <?= $view ?>
 
+
+    
 </body>
 </html>

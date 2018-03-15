@@ -16,7 +16,7 @@ class Controller {
         extract($scope);
         $f = implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'src', 'Storage', str_replace('Controller', '', basename(get_class($this))), $view]) . '.php';
         
-        var_dump($f);
+        //var_dump($f);
         if(file_exists($f)){
             $parse = new TemplateEngine($f);
             $view = $parse->parse();

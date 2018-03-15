@@ -38,9 +38,11 @@ class UserController extends Controller
                 $addMembre->save();
     
                 header('Location: /PiePHP/');
+                exit();
             }
             else{
                 header('Location: /PiePHP/user/register');
+                exit();
             }
 
         }else {
@@ -60,7 +62,6 @@ class UserController extends Controller
         $authUser = $loginUser->find(["WHERE" => "email = '" . $this->request->email ."'"]);
 
         if($authUser[0]['email'] === $this->request->email && $authUser[0]['password'] === $this->request->password){
-            echo "Connected";
             $_SESSION['idUser'] = $authUser[0]['id_user'];
             $this->render('index');
         }
@@ -107,10 +108,12 @@ class UserController extends Controller
                $userProfile = $profile->save();
                $membre = new MembreModel(['id_abonnement'=>$idAbo], $findMembre[0]['id_membre']);
                $updateMembre = $membre->save();
-               header('Location: /PiePHP/user/profile');           
+               header('Location: /PiePHP/user/profile');
+               exit();           
             }
            else{
                header('Location: /PiePHP/user/profile');
+               exit();
            }        
         }
     }
@@ -118,6 +121,7 @@ class UserController extends Controller
     public function logout(){
         session_destroy();
         header('Location: /PiePHP/');
+        exit();
     }
 
     public function test(){

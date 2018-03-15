@@ -11,17 +11,17 @@ class ORM extends Database
         foreach($fields as $key => $values){
             if(count($fields) == $count){
                 $fieldsKeys .= $key;
-                $fieldsValues .= "'" .$values. "'";
+                $fieldsValues .= '"' .$values. '"';
                 
             }
             else{
                 $count++;
                 $fieldsKeys .= $key . ", ";
-                $fieldsValues .= "'" .$values. "', ";
+                $fieldsValues .= '"' .$values. '", ';
             }
         }        
         $sql .= " (" .$fieldsKeys . ") VALUES (" . $fieldsValues .")";
-        var_dump($sql);
+        //var_dump($sql);
         $stmt = $this->getConnection()->prepare($sql);
         $stmt->execute();
         return $this->getConnection()->lastInsertId(); 
@@ -40,14 +40,15 @@ class ORM extends Database
         $count = 1;
         foreach($fields as $key => $values){
             if(count($fields) == $count){
-                $set .= $key . " = '" . $values ."'";
+                $set .= $key . ' = "' . $values .'"';
             }
             else{
-                $set .= $key . " = '" . $values . "', ";
+                $set .= $key . ' = "' . $values . '", ';
                 $count++;
             }
         }
         $sql .= $set . " WHERE id_".substr($table,0,-1)."=" . $id;
+        //var_dump($sql);
         $stmt = $this->getConnection()->prepare($sql);
         $stmt->execute();
     }
@@ -66,9 +67,28 @@ class ORM extends Database
         foreach($params as $key => $value){
             $sql.= " " . $key . " " . $value;
         }
-        var_dump($sql);
+        //var_dump($sql);
         $stmt = $this->getConnection()->query($sql);
         $row = $stmt->fetchAll();
         return $row;
     }
+
+    public function nb_pages($table, $params = [
+        "WHERE" => "1",
+        "ORDER BY" => "id ASC",
+        "LIMIT" => ""
+    ]){
+        $sql = "SELECT * FROM " . $table;
+        foreach($params as $key => $value){
+            $sql.= " " . $key . " " . $value;
+        }
+        //var_dump($sql);
+        $stmt = $this->getConnection()->query($sql);
+        $row = $stmt->fetchAll();
+       
+        $total_rep = $this->getConnection()->query("SELECT FOUND_ROWS() as total");
+        $total_rep = $total_rep->fetch()['total'];
+        return $total_rep;
+    }
+
 }
