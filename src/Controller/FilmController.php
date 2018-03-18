@@ -25,7 +25,7 @@ class FilmController extends Controller
     }
 
     public function searchFilm(){
-        var_dump($this->params);
+        //var_dump($this->params);
         $genre = new GenreModel($this->params);
         $allGenre = $genre->find(['WHERE' => '1']);
         
@@ -171,7 +171,7 @@ class FilmController extends Controller
         if($this->params['id_distrib'] == "none"){
             unset( $this->params['id_distrib'] );
         }
-        var_dump($this->params);
+        //var_dump($this->params);
 
         $film = new FilmModel($this->params, $id_film);
         $filmEdit = $film->save();
@@ -199,7 +199,7 @@ class FilmController extends Controller
         if($this->params['id_distrib'] == "none"){
             unset( $this->params['id_distrib'] );
         }
-        var_dump($this->params);
+        //var_dump($this->params);
         $film = new FilmModel($this->params);
         $filmAdd = $film->save();
 

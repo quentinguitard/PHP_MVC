@@ -22,6 +22,7 @@
                     <th scope="col">Nom</th>
                     <th scope="col">Prenom</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Info</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +33,7 @@
                     <td>{{$values['nomUser']}}</a></td>
                     <td>{{$values['prenomUser']}}</td>
                     <td>{{$values['email']}}</td>
+                    <td> <a href="/PiePHP/membre/info?id_membre={{$values['id_membre']}}" class="text-dark">More info</a> </td>
                 </tr>
                 </a>
                 @endforeach

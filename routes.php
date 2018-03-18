@@ -29,6 +29,11 @@ Router::connect('genre/add', ['controller' => 'GenreController', 'action' => 'ad
 Router::connect('genre/delete', ['controller' => 'GenreController', 'action' => 'delete']);
 
 Router::connect('membre', ['controller' => 'MembreController', 'action' => 'index']);
+Router::connect('membre/info', ['controller' => 'MembreController', 'action' => 'info']);
+Router::connect('membre/delete', ['controller' => 'MembreController', 'action' => 'deleteFilm']);
+Router::connect('membre/addFilm', ['controller' => 'MembreController', 'action' => 'addFilm']);
+
+
 
 
 

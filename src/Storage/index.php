@@ -42,7 +42,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Members</a>
+                    <a class="nav-link" href="/PiePHP/membre">Members</a>
                 </li>
             </ul>
             <div class="d-flex justify-content-end w-100">

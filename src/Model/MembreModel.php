@@ -15,8 +15,7 @@ class MembreModel extends Entity
         foreach($params as $key => $value){
             $sql.= " " . $key . " " . $value;
         }
-        var_dump($sql);
-
+    
         $db = new Database();
         $stmt = $db->getConnection()->query($sql);
         $row = $stmt->fetchAll();

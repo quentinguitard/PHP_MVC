@@ -22,6 +22,7 @@
         <div class="col">
         </div>
         <div class="col d-flex justify-content-end">
+            
         <a href="/PiePHP/film/delete?id_film=<?= $filmInfo['id_film'];?>" class="text-light "><button class="btn btn-danger">DELETE <i class="far fa-trash-alt"></i></button></a>
             
         <a href="/PiePHP/film/edit?id_film=<?= $filmInfo['id_film'];?>" class="text-light ml-3"><button  type="button" class="btn btn-dark">MODIFIER <i class="fas fa-edit"></i></button></a>
